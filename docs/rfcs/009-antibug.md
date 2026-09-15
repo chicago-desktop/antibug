@@ -136,7 +136,7 @@ Go. So `Scan in:` lists **targets**, and a target is one of three kinds:
 - **`wippy`** — a module working copy on disk: the scan runs the module's
   tests the way `make test` does (`cd <dir>/test && <wippy> test --host
   <host>`, the binary and host from the target's declaration; the local
-  runtime build by default, `~/repos/wippy/runtime/dist/wippy-linux-amd64`)
+  runtime build by default, `~/repos/wippy/chicago-desktop/runtime/dist/wippy-linux-amd64`)
   as a child process through the `exec` module, and parses its output
   line by line into cases (the runner's text lines — the implementer reads
   `wippy/test/display.lua` for the exact forms of a passed, failed and
@@ -151,9 +151,9 @@ Targets are **registry entries of the application**, found like widgets and
 image packs: `meta.type: chicago.antibug_target` with `meta.title`,
 `meta.kind` (`wippy` | `go`), `meta.dir` (absolute), `meta.wippy` (the
 binary, optional), `meta.host` (optional), `meta.order`. The stand declares
-four: `Wippy runtime` (go, `~/repos/wippy/runtime`), `tui-desktop` (wippy,
-`~/repos/wippy/kickside-module`), `Windows shell` (wippy,
-`~/repos/wippy/windows-module`), and the registry target needs no entry.
+four: `Wippy runtime` (go, `~/repos/wippy/chicago-desktop/runtime`), `tui-desktop` (wippy,
+`~/repos/wippy/chicago-desktop/tui-desktop`), `Chicago shell` (wippy,
+`~/repos/wippy/chicago-desktop/shell`), and the registry target needs no entry.
 Rights: `exec` for the runner (§3), on the declared directories only if the
 policy can name them; the window itself never execs.
 

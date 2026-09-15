@@ -31,8 +31,8 @@ module declares none of its own.
     type: chicago.antibug_target
     title: Chicago shell
     kind: wippy                        # or go
-    dir: /home/me/repos/wippy/windows-module
-    wippy: /home/me/repos/wippy/runtime/dist/wippy-linux-amd64
+    dir: /home/me/repos/wippy/chicago-desktop/shell
+    wippy: /home/me/repos/wippy/chicago-desktop/runtime/dist/wippy-linux-amd64
     host: wippy.terminal:host
     order: 2
     env:
