@@ -26,6 +26,9 @@ local sources = require("sources")
 local explorer_model = require("explorer_model")
 
 local RUNNER = "windows.antibug:runner"
+-- The picture of every dialog: the magnifier of the module's own image pack
+-- (`windows.antibug:images`), the same the registry entry names.
+local IMAGE = "windows.antibug:images/find"
 local STOP_TOPIC = "antibug.stop"
 -- How long a stopped target's process gets to say it is gone.
 local STOP_WAIT = "5s"
@@ -502,18 +505,18 @@ local function sheet_tree(model: any): any
     local sheet: any = model.sheet
     if sheet.kind == "save" then return filedialog.sheet(sheet.dialog) end
     if sheet.kind == "replace" then
-        return ui.confirm({title = "Save As", image = "find", icon = "¤", yes = "replace_yes", no = "replace_no",
+        return ui.confirm({title = "Save As", image = IMAGE, icon = "¤", yes = "replace_yes", no = "replace_no",
             lines = {tostring(sheet.place.path):match("[^/]*$") .. " already exists.", "Do you want to replace it?"}})
     end
     if sheet.kind == "quit" then
-        return ui.confirm({title = "AntiBug", image = "find", icon = "¤", yes = "quit_yes", no = "quit_no",
+        return ui.confirm({title = "AntiBug", image = IMAGE, icon = "¤", yes = "quit_yes", no = "quit_no",
             lines = {"A scan is running. Stop and exit?"}})
     end
     if sheet.kind == "box" then
         local box: any = model.scan.box or scan.summary(model.scan)
-        return ui.message({title = box.title, lines = box.lines, image = "find", icon = "¤"})
+        return ui.message({title = box.title, lines = box.lines, image = IMAGE, icon = "¤"})
     end
-    return ui.message({title = sheet.title, lines = sheet.lines, image = "find", icon = "¤"})
+    return ui.message({title = sheet.title, lines = sheet.lines, image = IMAGE, icon = "¤"})
 end
 
 function definition.view(model: any, context: any): any

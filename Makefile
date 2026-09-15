@@ -67,7 +67,8 @@ release-check: verify
 	$(WIPPY) publish --dry-run --create --module-visibility $(VIS) --module-type $(TYPE)
 
 # `wippy publish` packs src/ and embeds only what wippy.yaml lists under
-# `embed:`; check-module.mjs verifies every image pack is there.
+# `embed:` — the image pack in assets/images; check-module.mjs verifies
+# every image pack is there.
 publish:
 	node scripts/check-module.mjs
 	$(WIPPY) auth status

@@ -20,14 +20,16 @@ end
 
 local function define_tests()
     test.describe("AntiBug window entry", function()
-        test.it("is AntiBug in Programs with Find's picture, for administrators only", function()
+        test.it("is AntiBug in Programs with the magnifier of its own image pack, for administrators only", function()
             local meta = meta_of("windows.antibug:window")
             test.eq(table.concat({tostring(meta.type), tostring(meta.title), tostring(meta.group), tostring(meta.image),
                 tostring(meta.pixel_render), tostring(meta.pixel_state)}, "|"),
-                "tui_desktop.window|AntiBug|Programs|find|windows.shell.sdk:render|windows.antibug:window")
+                "tui_desktop.window|AntiBug|Programs|windows.antibug:images/find|windows.shell.sdk:render|windows.antibug:window")
             test.eq(meta.requires, "windows.admin", "AntiBug must name windows.admin in meta.requires")
+            -- The shell resolves a pack picture through the registry: the
+            -- entry is an fs.directory of meta.type windows.images.
             for _, size in ipairs({32, 16}) do
-                local picture, why = images.get("find", size)
+                local picture, why = images.get(meta.image, size)
                 test.not_nil(picture, "find@" .. tostring(size) .. ": " .. tostring(why))
             end
         end)

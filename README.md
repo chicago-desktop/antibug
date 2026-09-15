@@ -95,7 +95,7 @@ reason; a bad exit with no failed case is one finding too.
 
 `windows.antibug:process_host` — the process host the target processes run
 on, `app:processes` by default. Nothing else: the window is found by the
-Start menu from its registry entry, and its picture is the shell's Find.
+Start menu from its registry entry, and its picture comes with the module.
 
 ## Inside
 
@@ -111,6 +111,13 @@ Start menu from its registry entry, and its picture is the shell's Find.
 - `windows.antibug:runner` — the function that runs one scan item;
   `windows.antibug:target` — the process that runs one target's child
   through `windows.antibug:exec`.
+- `windows.antibug:images` — the module carries its own pictures, an image
+  pack of the shell (`meta.type: windows.images`) under
+  `assets/images/{32,16}`: the magnifier `find`, named
+  `windows.antibug:images/find` by the entry and every dialog; copied from
+  the shell's icon set (Microsoft's artwork from `shell32.dll`, see
+  `assets/images/SOURCE.md`) and embedded at publish through `embed:` in
+  `wippy.yaml`.
 
 The design and its measurements are in [docs/antibug.md](docs/antibug.md)
 and [docs/rfcs/009-antibug.md](docs/rfcs/009-antibug.md).
@@ -149,4 +156,5 @@ https://github.com/wippy-windows/antibug.
 
 ## Licence
 
-MIT.
+MIT. The picture in `assets/images` is Microsoft's artwork (`shell32.dll`),
+copied from the shell's icon set, and is not covered by the licence.

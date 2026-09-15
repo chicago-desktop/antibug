@@ -24,7 +24,7 @@ entries:
     kind: function.lua
     meta:
       type: test
-      comment: "AntiBug's entry — the Start menu fields, Find's picture, requires windows.admin, and the trust shape (the window calls only the runner, the runner has its own actor and the wide policy)."
+      comment: "AntiBug's entry — the Start menu fields, the magnifier of its own image pack at both sizes, requires windows.admin, and the trust shape (the window calls only the runner, the runner has its own actor and the wide policy)."
       group: AntiBug
       suite: windows_antibug
     source: file://window_test.lua
