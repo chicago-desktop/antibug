@@ -1,6 +1,6 @@
 organization: chicago
 module: antibug
-description: AntiBug for the Windows 95 shell — runs the application's test entries and the targets it declares (module working copies through the wippy test runner, Go modules through go test -json) like a 1995 virus scan, for administrators.
+description: AntiBug for the Chicago desktop — runs the application's test entries and the targets it declares (module working copies through the wippy test runner, Go modules through go test -json) like a 1995 virus scan, for administrators.
 license: MIT
 repository: https://github.com/chicago-desktop/antibug
 homepage: https://wippy.ai
@@ -9,7 +9,7 @@ keywords:
   - tui
   - terminal
   - desktop
-  - windows
+  - chicago
 # No `version:` here — the publisher picks it (`wippy publish` bumps the
 # latest published one). A published version is immutable.
 exclude_meta:

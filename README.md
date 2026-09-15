@@ -1,6 +1,6 @@
 # chicago/antibug — AntiBug
 
-A test scanner for the Windows 95 shell of the terminal desktop
+A test scanner for the Chicago desktop in the terminal
 ([chicago/shell](https://github.com/chicago-desktop/shell)), in the style of
 McAfee VirusScan 95: Start → Programs → **AntiBug**. A scan is a run of test
 suites, an "infected" test is a failed case, and the end of a scan is the
@@ -29,7 +29,7 @@ module declares none of its own.
   kind: registry.entry
   meta:
     type: chicago.antibug_target
-    title: Windows shell
+    title: Chicago shell
     kind: wippy                        # or go
     dir: /home/me/repos/wippy/windows-module
     wippy: /home/me/repos/wippy/runtime/dist/wippy-linux-amd64
@@ -115,7 +115,7 @@ Start menu from its registry entry, and its picture comes with the module.
   pack of the shell (`meta.type: chicago.images`) under
   `assets/images/{32,16}`: the magnifier `find`, named
   `chicago.antibug:images/find` by the entry and every dialog; copied from
-  the shell's icon set (Microsoft's artwork from `shell32.dll`, see
+  the shell's icon set (an interim icon set, see
   `assets/images/SOURCE.md`) and embedded at publish through `embed:` in
   `wippy.yaml`.
 
@@ -125,11 +125,11 @@ and [docs/rfcs/009-antibug.md](docs/rfcs/009-antibug.md).
 ## Developing
 
 ```bash
-make setup     # resolve the dependencies from the Hub (once, and after changing them)
+make setup     # resolve the dependencies (once, and after changing them)
 make check     # the repository's invariants
 make lint      # late locals, then wippy lint of this namespace and the harness
 make test      # the harness in test/, with test/shots/antibug.png and antibug-complete.png
-make publish   # to the Hub, after `wippy auth login`
+make publish   # publish a release, after `wippy auth login`
 ```
 
 The suites: `window_test` (the entry, the picture, the trust shape),
@@ -150,11 +150,12 @@ shell's guide, and the skill for agents in
 [skills/wippy-window-app/SKILL.md](skills/wippy-window-app/SKILL.md); the
 rules of this repository are in [AGENTS.md](AGENTS.md).
 
-Made from [the Windows module template](https://github.com/chicago-desktop/module-template) for
-modules of the Windows 95 shell. Repository:
+Made from [the Chicago module template](https://github.com/chicago-desktop/module-template) for
+modules of the Chicago shell. Repository:
 https://github.com/chicago-desktop/antibug.
 
 ## Licence
 
-MIT. The picture in `assets/images` is Microsoft's artwork (`shell32.dll`),
-copied from the shell's icon set, and is not covered by the licence.
+The icon set is an interim one and is being replaced with original pixel art
+([chicago-desktop/shell#1](https://github.com/chicago-desktop/shell/issues/1));
+the code is MIT.

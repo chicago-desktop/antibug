@@ -1,7 +1,7 @@
 version: "1.0"
 namespace: chicago.antibug
 
-# AntiBug (docs/rfcs/009-antibug.md): the test scanner of the Windows 95 shell
+# AntiBug (docs/rfcs/009-antibug.md): the test scanner of the Chicago shell
 # in the style of McAfee VirusScan 95. A scan is a run of test suites; an
 # infected test is a failed case. The window runs the application's
 # `meta.type: test` entries inside the running runtime, one at a time,
@@ -26,7 +26,7 @@ entries:
     kind: ns.definition
     meta:
       title: AntiBug
-      description: AntiBug for the Windows 95 shell — runs the application's tests and the targets it declares like a 1995 virus scan.
+      description: AntiBug for the Chicago desktop — runs the application's tests and the targets it declares like a 1995 virus scan.
 
   # ─── Dependencies ────────────────────────────────────────────────────
   # A compatibility range, never an exact version: the lock holds the exact
@@ -35,7 +35,7 @@ entries:
     name: dep.chicago.shell
     kind: ns.dependency
     meta:
-      comment: The Windows 95 shell — the window SDK, the image packs, the file dialog and the drives of My Computer the log is saved to.
+      comment: The Chicago shell — the window SDK, the image packs, the file dialog and the drives of My Computer the log is saved to.
     component: chicago/shell
 
   - version: "*"
@@ -122,7 +122,7 @@ entries:
     kind: fs.directory
     meta:
       type: chicago.images
-      comment: "AntiBug's pictures — the magnifier at 32 and 16 px, an image pack of the shell; Microsoft's artwork, see assets/images/SOURCE.md."
+      comment: "AntiBug's pictures — the magnifier at 32 and 16 px, an image pack of the shell; an interim icon set, see assets/images/SOURCE.md."
     base: module
     directory: ./assets/images
     auto_init: false
