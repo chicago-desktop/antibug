@@ -1,0 +1,28 @@
+organization: windows
+module: antibug
+description: AntiBug for the Windows 95 shell — runs the application's test entries and the targets it declares (module working copies through the wippy test runner, Go modules through go test -json) like a 1995 virus scan, for administrators.
+license: MIT
+repository: https://github.com/wippy-windows/antibug
+homepage: https://wippy.ai
+keywords:
+  - kickside
+  - tui
+  - terminal
+  - desktop
+  - windows
+# No `version:` here — the publisher picks it (`wippy publish` bumps the
+# latest published one). A published version is immutable.
+exclude_meta:
+  type:
+    - test
+exclude:
+  - "wippy.lock"
+  - "app:**"
+  - "app.env:**"
+  - "test/**"
+  - "test:**"
+  - ".wippy/**"
+  - ".wippy:**"
+# `wippy publish` packs the entries of src/ and embeds only the fs.directory
+# entries listed under `embed:`. AntiBug declares none — its picture is the
+# shell's Find — so there is no `embed:` list; add one with the first pack.

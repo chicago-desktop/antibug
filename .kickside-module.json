@@ -1,0 +1,12 @@
+{
+  "templateVersion": 1,
+  "initialized": true,
+  "identity": {
+    "organization": "windows",
+    "module": "antibug",
+    "namespace": "windows.antibug",
+    "tag": "windows-antibug",
+    "title": "AntiBug",
+    "githubOwner": "wippy-windows"
+  }
+}
