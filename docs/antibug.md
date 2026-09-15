@@ -24,10 +24,10 @@ a `funcs` call runs the callee under the actor its entry declares, with its
 declared policies added to the caller's scope; an entry without a `security`
 block runs as its caller. So the window keeps a narrow scope — the compositor,
 the registry, the drives, and `funcs.call` on the runner only — and calls
-`windows.antibug:runner`, which has its own actor and a wide policy,
+`chicago.antibug:runner`, which has its own actor and a wide policy,
 like the CLI runner's; a test entry declares no actor and runs under it. The
 runner runs only `meta.type: test` function entries and declared targets. The
-user group's own `funcs.call` does not cover `windows.shell.*`, so no
+user group's own `funcs.call` does not cover `chicago.shell.*`, so no
 other window reaches the runner.
 
 **Test entries.** Sequential: `funcs.async` of the runner, its answer channel
@@ -38,7 +38,7 @@ failure. `Stop` lets the running entry finish (it cannot be killed) and starts
 no other. The gauge counts the entry's planned cases.
 
 **Targets** (§4a). A registry entry of the application with `meta.type:
-windows.antibug_target`, `meta.title`, `meta.kind` (`wippy` | `go`),
+chicago.antibug_target`, `meta.title`, `meta.kind` (`wippy` | `go`),
 `meta.dir`, `meta.env` (the child's environment), and for `wippy` the optional
 `meta.wippy` (the binary, `wippy` from PATH if absent — declare the local build
 explicitly) and `meta.host` (`wippy.terminal:host` if absent). The child gets
@@ -50,9 +50,9 @@ runner HOME and PATH, which the harness it boots reads through `${env:…}`. `wi
 `<dir>/test`, as `make test` does; `go` runs `go test -json ./...` in `<dir>`.
 The runner builds the command from the registry entry — never from the
 window's arguments — with no shell, and spawns the target process
-(`windows.antibug:target`) under its own actor on the host of the
+(`chicago.antibug:target`) under its own actor on the host of the
 `process_host` requirement; that process runs the child through `exec`
-(`windows.antibug:exec`, which passes HOME and PATH), parses its
+(`chicago.antibug:exec`, which passes HOME and PATH), parses its
 output into case events for the window as they come, and kills the child on
 `Stop`. The window never execs. A target that cannot start is one finding with
 the reason; a bad exit with no failed case is one finding too.

@@ -1,12 +1,12 @@
 version: "1.0"
-namespace: windows.antibug
+namespace: chicago.antibug
 
 # AntiBug (docs/rfcs/009-antibug.md): the test scanner of the Windows 95 shell
 # in the style of McAfee VirusScan 95. A scan is a run of test suites; an
 # infected test is a failed case. The window runs the application's
 # `meta.type: test` entries inside the running runtime, one at a time,
 # without blocking the shell, and the targets the application declares
-# (`meta.type: windows.antibug_target`, README "Scan targets") — module
+# (`meta.type: chicago.antibug_target`, README "Scan targets") — module
 # working copies through the wippy test runner, Go modules through
 # `go test -json` — as children.
 #
@@ -32,32 +32,32 @@ entries:
   # A compatibility range, never an exact version: the lock holds the exact
   # one. `*` is any published version.
   - version: "*"
-    name: dep.windows.shell
+    name: dep.chicago.shell
     kind: ns.dependency
     meta:
       comment: The Windows 95 shell — the window SDK, the image packs, the file dialog and the drives of My Computer the log is saved to.
-    component: windows/shell
+    component: chicago/shell
 
   - version: "*"
-    name: dep.windows.tui_desktop
+    name: dep.chicago.tui_desktop
     kind: ns.dependency
     meta:
       comment: The desktop base — the compositor that owns the window's frame, size and input, and asks meta.requires before opening it.
-    component: windows/tui-desktop
+    component: chicago/tui-desktop
 
   # ─── What the module asks of the application ──────────────────────────
-  # windows.antibug:process_host
+  # chicago.antibug:process_host
   - name: process_host
     kind: ns.requirement
     meta:
       comment: The process host AntiBug's target processes run on.
     default: app:processes
     targets:
-      - entry: windows.antibug:target
+      - entry: chicago.antibug:target
         path: .meta.process_host
 
   # ─── Policies ─────────────────────────────────────────────────────────
-  # windows.antibug:window_scope
+  # chicago.antibug:window_scope
   - name: window_scope
     kind: security.policy
     meta:
@@ -73,7 +73,7 @@ entries:
       resources: "*"
       effect: allow
 
-  # windows.antibug:runner_call
+  # chicago.antibug:runner_call
   #
   # The one function the window may call. An application's user group
   # covers its own functions, not this entry, so no other window reaches the
@@ -86,10 +86,10 @@ entries:
       actions:
         - funcs.call
       resources:
-        - windows.antibug:runner
+        - chicago.antibug:runner
       effect: allow
 
-  # windows.antibug:runner_policy
+  # chicago.antibug:runner_policy
   - name: runner_policy
     kind: security.policy
     meta:
@@ -99,7 +99,7 @@ entries:
       resources: "*"
       effect: allow
 
-  # windows.antibug:exec
+  # chicago.antibug:exec
   #
   # exec.native does not inherit the OS environment, and there is no
   # `default_env` here: a `${env:HOME}` placeholder in this entry failed the
@@ -112,30 +112,30 @@ entries:
       comment: Runs AntiBug's scan targets — the wippy test runner of a module working copy, go test of a Go module — with the environment the target declares.
 
   # ─── Pictures ─────────────────────────────────────────────────────────
-  # windows.antibug:images
+  # chicago.antibug:images
   #
   # The shell finds an image pack in the registry by its meta.type and names a
-  # picture `<entry>/<file>`: `windows.antibug:images/find`. PNG in
+  # picture `<entry>/<file>`: `chicago.antibug:images/find`. PNG in
   # assets/images/32 and 16; packed only because wippy.yaml lists the entry
   # under `embed:`.
   - name: images
     kind: fs.directory
     meta:
-      type: windows.images
+      type: chicago.images
       comment: "AntiBug's pictures — the magnifier at 32 and 16 px, an image pack of the shell; Microsoft's artwork, see assets/images/SOURCE.md."
     base: module
     directory: ./assets/images
     auto_init: false
 
   # ─── Libraries ────────────────────────────────────────────────────────
-  # windows.antibug:scan
+  # chicago.antibug:scan
   - name: scan
     kind: library.lua
     meta:
       comment: AntiBug's model, pure — the test entries and targets, the group, suite and entry tree, what a selection scans, the scan's state machine over the wippy.test events, the findings, the log and the box.
     source: file://scan.lua
 
-  # windows.antibug:targets
+  # chicago.antibug:targets
   - name: targets
     kind: library.lua
     meta:
@@ -145,7 +145,7 @@ entries:
       - json
 
   # ─── The runner and the target process ────────────────────────────────
-  # windows.antibug:runner
+  # chicago.antibug:runner
   - name: runner
     kind: function.lua
     meta:
@@ -157,14 +157,14 @@ entries:
       - process
       - registry
     imports:
-      targets: windows.antibug:targets
+      targets: chicago.antibug:targets
     security:
       actor:
-        id: windows.antibug:runner
+        id: chicago.antibug:runner
       policies:
-        - windows.antibug:runner_policy
+        - chicago.antibug:runner_policy
 
-  # windows.antibug:target
+  # chicago.antibug:target
   #
   # Spawned by the runner only (the window may not spawn): it inherits the
   # runner's actor, runs the target's command through `exec`, streams the
@@ -181,22 +181,22 @@ entries:
       - exec
       - process
     imports:
-      targets: windows.antibug:targets
+      targets: chicago.antibug:targets
 
   # ─── The window ───────────────────────────────────────────────────────
-  # windows.antibug:window
+  # chicago.antibug:window
   - name: window
     kind: process.lua
     meta:
       type: tui_desktop.window
       title: AntiBug
       # Runs builds and test suites on the server through its runner's broad
-      # policy: only for a logged-on person whose scope grants windows.admin.
-      requires: windows.admin
+      # policy: only for a logged-on person whose scope grants chicago.admin.
+      requires: chicago.admin
       # There is no antivirus picture in shell32; the magnifier of Find is
       # the closest — a scanner looks for something. A picture of the
       # module's own pack, named `<entry>/<file>`.
-      image: windows.antibug:images/find
+      image: chicago.antibug:images/find
       icon: "¤"
       group: Programs
       order: 60
@@ -204,8 +204,8 @@ entries:
       height: 22
       window_type: app
       resizable: true
-      pixel_render: windows.shell.sdk:render
-      pixel_state: windows.antibug:window
+      pixel_render: chicago.shell.sdk:render
+      pixel_state: chicago.antibug:window
       comment: AntiBug — runs the application's tests and the declared targets like a 1995 virus scan — Where and What, Reports, the findings, the progress and the Scan complete box; an SDK application.
     source: file://window.lua
     method: main
@@ -218,13 +218,13 @@ entries:
       - time
     security:
       policies:
-        - windows.antibug:window_scope
-        - windows.antibug:runner_call
+        - chicago.antibug:window_scope
+        - chicago.antibug:runner_call
     imports:
-      app: windows.shell.sdk:app
-      ui: windows.shell.sdk:ui
-      filedialog: windows.shell.sdk:filedialog
-      scan: windows.antibug:scan
-      targets: windows.antibug:targets
-      sources: windows.shell.explorer:sources
-      explorer_model: windows.shell.explorer:model
+      app: chicago.shell.sdk:app
+      ui: chicago.shell.sdk:ui
+      filedialog: chicago.shell.sdk:filedialog
+      scan: chicago.antibug:scan
+      targets: chicago.antibug:targets
+      sources: chicago.shell.explorer:sources
+      explorer_model: chicago.shell.explorer:model

@@ -157,7 +157,7 @@ local function define_tests()
                 declared("app:runtime", {title = "Runtime", kind = "go", dir = "/w/runtime", order = 1}),
                 declared("app:odd", {title = "Odd", kind = "make", dir = "/w/odd", order = 3}),
                 declared("app:quoted", {title = "Quoted", kind = "wippy", dir = "/w/\"x", order = 4}),
-                {id = "app:other", kind = "registry.entry", meta = {type = "windows.images"}},
+                {id = "app:other", kind = "registry.entry", meta = {type = "chicago.images"}},
             })
             test.eq(#list, 4, "only the declarations")
             test.eq(list[1].id, "app:runtime", "by order")

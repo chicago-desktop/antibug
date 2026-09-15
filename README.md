@@ -1,7 +1,7 @@
-# windows/antibug — AntiBug
+# chicago/antibug — AntiBug
 
 A test scanner for the Windows 95 shell of the terminal desktop
-([windows/shell](https://github.com/wippy-windows/windows)), in the style of
+([chicago/shell](https://github.com/chicago-desktop/shell)), in the style of
 McAfee VirusScan 95: Start → Programs → **AntiBug**. A scan is a run of test
 suites, an "infected" test is a failed case, and the end of a scan is the
 "Scan complete." box. For administrators only.
@@ -21,14 +21,14 @@ Stop, which kills a target's child.
 ## Scan targets: how an application adds one
 
 A target is a registry entry of the application with
-`meta.type: windows.antibug_target`. AntiBug finds every such entry; the
+`meta.type: chicago.antibug_target`. AntiBug finds every such entry; the
 module declares none of its own.
 
 ```yaml
 - name: antibug_shell
   kind: registry.entry
   meta:
-    type: windows.antibug_target
+    type: chicago.antibug_target
     title: Windows shell
     kind: wippy                        # or go
     dir: /home/me/repos/wippy/windows-module
@@ -70,13 +70,13 @@ reason; a bad exit with no failed case is one finding too.
 
 ## Trust
 
-- **The window is narrow.** Its policies are `windows.antibug:window_scope`
+- **The window is narrow.** Its policies are `chicago.antibug:window_scope`
   (talk to the compositor and its target process, find entries, read the
-  drives) and `windows.antibug:runner_call` — `funcs.call` on
-  `windows.antibug:runner` and nothing else. It never execs.
-- **The runner carries the rights.** `windows.antibug:runner` is a function
-  entry with its own actor (`windows.antibug:runner`) and the unrestricted
-  `windows.antibug:runner_policy`, like the CLI test runner's: tests touch
+  drives) and `chicago.antibug:runner_call` — `funcs.call` on
+  `chicago.antibug:runner` and nothing else. It never execs.
+- **The runner carries the rights.** `chicago.antibug:runner` is a function
+  entry with its own actor (`chicago.antibug:runner`) and the unrestricted
+  `chicago.antibug:runner_policy`, like the CLI test runner's: tests touch
   the database, fs and gfx, targets run through `exec`. A `funcs` call runs
   the callee under the actor its entry declares, its declared policies added
   to the caller's scope — measured, not assumed, by
@@ -84,37 +84,37 @@ reason; a bad exit with no failed case is one finding too.
   own and runs under the runner; so does the target process the runner
   spawns. The runner runs only `meta.type: test` entries and declared
   targets, and refuses anything else by name.
-- **Administrators only.** The window names `requires: windows.admin`; the
+- **Administrators only.** The window names `requires: chicago.admin`; the
   base's compositor asks the logged-on person's scope before opening it
   (`app.security:admin` has it through `*`). Under a terminal.ssh host anyone
   with an account logs on — without the field AntiBug would open for
   everyone, with the runner behind it.
-- Give no other entry `funcs.call` on `windows.antibug:runner`.
+- Give no other entry `funcs.call` on `chicago.antibug:runner`.
 
 ## What the application provides
 
-`windows.antibug:process_host` — the process host the target processes run
+`chicago.antibug:process_host` — the process host the target processes run
 on, `app:processes` by default. Nothing else: the window is found by the
 Start menu from its registry entry, and its picture comes with the module.
 
 ## Inside
 
-- `windows.antibug:window` — the window, on the shell's SDK
-  (`windows.shell.sdk:app`), with the file dialog and My Computer's drives
+- `chicago.antibug:window` — the window, on the shell's SDK
+  (`chicago.shell.sdk:app`), with the file dialog and My Computer's drives
   for Save….
-- `windows.antibug:scan` — the model, pure: the tree, what a selection
+- `chicago.antibug:scan` — the model, pure: the tree, what a selection
   scans, the scan's state machine over the `wippy.test` events, the
   findings, the log and the box.
-- `windows.antibug:targets` — the targets, pure: the declarations, the
+- `chicago.antibug:targets` — the targets, pure: the declarations, the
   command of each kind, and the parsers of the wippy runner's text and of
   `go test -json` into case events.
-- `windows.antibug:runner` — the function that runs one scan item;
-  `windows.antibug:target` — the process that runs one target's child
-  through `windows.antibug:exec`.
-- `windows.antibug:images` — the module carries its own pictures, an image
-  pack of the shell (`meta.type: windows.images`) under
+- `chicago.antibug:runner` — the function that runs one scan item;
+  `chicago.antibug:target` — the process that runs one target's child
+  through `chicago.antibug:exec`.
+- `chicago.antibug:images` — the module carries its own pictures, an image
+  pack of the shell (`meta.type: chicago.images`) under
   `assets/images/{32,16}`: the magnifier `find`, named
-  `windows.antibug:images/find` by the entry and every dialog; copied from
+  `chicago.antibug:images/find` by the entry and every dialog; copied from
   the shell's icon set (Microsoft's artwork from `shell32.dll`, see
   `assets/images/SOURCE.md`) and embedded at publish through `embed:` in
   `wippy.yaml`.
@@ -140,7 +140,7 @@ through the runner, the target process and `exec` — it needs Go under
 `/usr/local/go/bin`, see `antibug_go_target` in `test/src/_index.yaml`).
 
 **A local build of the runtime fork is required**
-([wippy-windows/runtime](https://github.com/wippy-windows/runtime), branch
+([chicago-desktop/runtime](https://github.com/chicago-desktop/runtime), branch
 `wippy-projects`): the shell declares the `gfx` module, which the release
 runtime does not have, and `wippy` from PATH does not load the shell at all.
 The Makefile's `WIPPY` names the build; override it with `make test WIPPY=…`.
@@ -150,9 +150,9 @@ shell's guide, and the skill for agents in
 [skills/wippy-window-app/SKILL.md](skills/wippy-window-app/SKILL.md); the
 rules of this repository are in [AGENTS.md](AGENTS.md).
 
-Made from [the Windows module template](https://github.com/wippy-windows/module-template) for
+Made from [the Windows module template](https://github.com/chicago-desktop/module-template) for
 modules of the Windows 95 shell. Repository:
-https://github.com/wippy-windows/antibug.
+https://github.com/chicago-desktop/antibug.
 
 ## Licence
 

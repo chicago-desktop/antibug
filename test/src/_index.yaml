@@ -1,7 +1,7 @@
 version: "1.0"
 namespace: app
 
-# Standalone harness for windows/antibug. Provides the host resources the boot
+# Standalone harness for chicago/antibug. Provides the host resources the boot
 # needs (app:db, app:processes, a gateway and a router for the shell's
 # endpoints, env storage, a permissive actor scope, the fonts and the shots
 # folder), the probes, fixtures and the Go target AntiBug's suites use, and
@@ -24,9 +24,9 @@ entries:
     kind: function.lua
     meta:
       type: test
-      comment: "AntiBug's entry — the Start menu fields, the magnifier of its own image pack at both sizes, requires windows.admin, and the trust shape (the window calls only the runner, the runner has its own actor and the wide policy)."
+      comment: "AntiBug's entry — the Start menu fields, the magnifier of its own image pack at both sizes, requires chicago.admin, and the trust shape (the window calls only the runner, the runner has its own actor and the wide policy)."
       group: AntiBug
-      suite: windows_antibug
+      suite: chicago_antibug
     source: file://window_test.lua
     method: run
     # Reading a picture takes `registry.get` as well as `fs.get`, and `gfx` to
@@ -34,7 +34,7 @@ entries:
     modules: [gfx, fs, registry]
     imports:
       test: wippy.test:test
-      images: windows.shell.theme:images
+      images: chicago.shell.theme:images
 
   # ─── AntiBug §3: does a funcs call honour the callee's declared actor? ───
   # A probe with its own `security` block and the same probe without one; the
@@ -89,7 +89,7 @@ entries:
     meta:
       type: test
       group: AntiBug
-      suite: windows_antibug
+      suite: chicago_antibug
       comment: AntiBug §3 — a funcs call runs the callee under the actor its entry declares, its declared policies added to the caller's scope; measured as the runner and as a narrow caller, against a probe without a security block.
     source: file://antibug_actor_test.lua
     method: run
@@ -102,19 +102,19 @@ entries:
     meta:
       type: test
       group: AntiBug
-      suite: windows_antibug
+      suite: chicago_antibug
       comment: AntiBug §6 — the model on fake events, every menu item and button, the close gate, Save…, the layout in both modes, a live scan of a real harness entry through the real runner, and test/shots/antibug.png and antibug-complete.png.
     source: file://antibug_test.lua
     method: run
     modules: [channel, time, fs, gfx, funcs]
     imports:
       test: wippy.test:test
-      ui: windows.shell.sdk:ui
-      app: windows.shell.sdk:app
-      render: windows.shell.sdk:render
-      rasters: windows.shell.theme:rasters
-      scan: windows.antibug:scan
-      antibug_window: windows.antibug:window
+      ui: chicago.shell.sdk:ui
+      app: chicago.shell.sdk:app
+      render: chicago.shell.sdk:render
+      rasters: chicago.shell.theme:rasters
+      scan: chicago.antibug:scan
+      antibug_window: chicago.antibug:window
 
   # AntiBug §4a: output captured from the real tools, and a Go module scanned
   # as a `go` target by the live case.
@@ -131,7 +131,7 @@ entries:
   - name: antibug_go_target
     kind: registry.entry
     meta:
-      type: windows.antibug_target
+      type: chicago.antibug_target
       title: AntiBug fixture (Go)
       kind: go
       dir: fixtures/antibug/gomod
@@ -150,17 +150,17 @@ entries:
     meta:
       type: test
       group: AntiBug
-      suite: windows_antibug
+      suite: chicago_antibug
       comment: AntiBug §4a — the wippy runner and go test -json parsers on captured output, the declarations and commands, a target's state machine in the model and the window, and a live Go target through the real runner, target process and exec.
     source: file://antibug_targets_test.lua
     method: run
     modules: [channel, time, fs]
     imports:
       test: wippy.test:test
-      app: windows.shell.sdk:app
-      scan: windows.antibug:scan
-      targets: windows.antibug:targets
-      antibug_window: windows.antibug:window
+      app: chicago.shell.sdk:app
+      scan: chicago.antibug:scan
+      targets: chicago.antibug:targets
+      antibug_window: chicago.antibug:window
 
   # ─── Host resources ───────────────────────────────────────────────────
   - name: shots
@@ -227,7 +227,7 @@ entries:
     kind: ns.dependency
     meta:
       comment: The module under test; its source is replaced with ../ in .wippy.yaml.
-    component: "windows/antibug"
+    component: "chicago/antibug"
 
   - name: antibug_harness.dep.migration
     version: "*"

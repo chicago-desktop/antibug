@@ -1,8 +1,8 @@
--- windows.antibug:targets — scan targets beyond the registry
+-- chicago.antibug:targets — scan targets beyond the registry
 -- (FR-009 §4a), pure.
 --
 -- A target is a registry entry of the application with `meta.type:
--- windows.antibug_target`: a module working copy run through the wippy test
+-- chicago.antibug_target`: a module working copy run through the wippy test
 -- runner (`kind: wippy`) or a Go module run through `go test -json` (`kind:
 -- go`). This file knows the declarations, the command of each kind, and the
 -- two parsers that turn the child's output into the events the scan model
@@ -26,7 +26,7 @@ local json = require("json")
 
 local targets = {}
 
-targets.TYPE = "windows.antibug_target"
+targets.TYPE = "chicago.antibug_target"
 targets.DEFAULT_WIPPY = "wippy"
 targets.DEFAULT_HOST = "wippy.terminal:host"
 -- Every child runs at the lowest priority. A module's suite or a Go build

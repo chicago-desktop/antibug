@@ -1,4 +1,4 @@
--- windows.antibug:runner — runs a scan item for AntiBug's window
+-- chicago.antibug:runner — runs a scan item for AntiBug's window
 -- (FR-009 §3, shape 1; §4a).
 --
 -- The window is a program under the logged-on user and keeps a narrow scope;
@@ -14,7 +14,7 @@
 -- Two items:
 --   {entry = <id>, pid, topic} — a `meta.type: test` function entry, run
 --     here; the test library streams its events straight to the window.
---   {target = <id>, pid, topic} — a `meta.type: windows.antibug_target`
+--   {target = <id>, pid, topic} — a `meta.type: chicago.antibug_target`
 --     entry (§4a): the target process is spawned under this runner's actor
 --     (it runs the child through `exec`), and its pid is returned so the
 --     window can ask it to stop. The command is built from the registry
@@ -26,7 +26,7 @@ local registry = require("registry")
 local process = require("process")
 local targets = require("targets")
 
-local TARGET_PROCESS = "windows.antibug:target"
+local TARGET_PROCESS = "chicago.antibug:target"
 local DEFAULT_PROCESS_HOST = "app:processes"
 
 local function run_entry(given: any): any

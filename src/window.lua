@@ -1,6 +1,6 @@
 -- AntiBug (FR-009 §4, §4a): the test scanner window, an SDK application.
 --
--- The model is `windows.antibug:scan`, pure; here are the window's
+-- The model is `chicago.antibug:scan`, pure; here are the window's
 -- tree, its actions and the world it reads through `definition.deps.sys` (a
 -- test replaces it):
 --   the test entries and the declared targets from the registry;
@@ -25,10 +25,10 @@ local targets = require("targets")
 local sources = require("sources")
 local explorer_model = require("explorer_model")
 
-local RUNNER = "windows.antibug:runner"
+local RUNNER = "chicago.antibug:runner"
 -- The picture of every dialog: the magnifier of the module's own image pack
--- (`windows.antibug:images`), the same the registry entry names.
-local IMAGE = "windows.antibug:images/find"
+-- (`chicago.antibug:images`), the same the registry entry names.
+local IMAGE = "chicago.antibug:images/find"
 local STOP_TOPIC = "antibug.stop"
 -- How long a stopped target's process gets to say it is gone.
 local STOP_WAIT = "5s"

@@ -1,4 +1,4 @@
--- windows.antibug:target — runs ONE scan target as a child
+-- chicago.antibug:target — runs ONE scan target as a child
 -- (FR-009 §4a).
 --
 -- Spawned by the runner, never by the window: it inherits the runner's actor,
@@ -14,7 +14,7 @@ local exec = require("exec")
 local process = require("process")
 local targets = require("targets")
 
-local EXECUTOR = "windows.antibug:exec"
+local EXECUTOR = "chicago.antibug:exec"
 local STOP = "antibug.stop"
 
 local function main(args: any)
